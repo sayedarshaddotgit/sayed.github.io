@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sayed Arshad Khan — Economist</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f2ec;
+      --ink: #1a1a18;
+      --muted: #6b6b62;
+      --accent: #2b4a2f;
+      --line: #d4cfc5;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --mono: 'DM Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* ── HEADER ── */
+    header {
+      border-bottom: 1px solid var(--line);
+      padding: 3.5rem 6vw 3rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 2rem;
+      opacity: 0;
+      animation: fadeUp .8s ease forwards;
+    }
+
+    .name {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+    }
+
+    .title-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--muted);
+      margin-top: .6rem;
+    }
+
+    .contact-block {
+      text-align: right;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .contact-block a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color .2s;
+    }
+
+    .contact-block a:hover { border-color: var(--accent); }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      gap: 0;
+      padding: 0 6vw;
+      border-bottom: 1px solid var(--line);
+      opacity: 0;
+      animation: fadeUp .8s .15s ease forwards;
+    }
+
+    nav a {
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--muted);
+      padding: .9rem 1.4rem;
+      border-right: 1px solid var(--line);
+      transition: color .2s, background .2s;
+    }
+
+    nav a:first-child { padding-left: 0; border-left: none; }
+    nav a:hover { color: var(--ink); background: rgba(0,0,0,.03); }
+
+    /* ── MAIN GRID ── */
+    main {
+      display: grid;
+      grid-template-columns: 1fr 2.2fr;
+      min-height: calc(100vh - 140px);
+    }
+
+    /* ── SIDEBAR ── */
+    aside {
+      border-right: 1px solid var(--line);
+      padding: 3rem 3rem 3rem 6vw;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      opacity: 0;
+      animation: fadeUp .8s .25s ease forwards;
+    }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+      padding-bottom: .5rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .skills-group { margin-bottom: 2.2rem; }
+
+    .skills-group h4 {
+      font-family: var(--serif);
+      font-size: .95rem;
+      font-style: italic;
+      margin-bottom: .6rem;
+      color: var(--ink);
+    }
+
+    .tag-list { display: flex; flex-wrap: wrap; gap: .35rem; }
+
+    .tag {
+      font-size: 11px;
+      padding: .25rem .6rem;
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      color: var(--muted);
+      background: white;
+    }
+
+    /* ── CONTENT ── */
+    .content {
+      padding: 3rem 6vw 3rem 3.5rem;
+      opacity: 0;
+      animation: fadeUp .8s .35s ease forwards;
+    }
+
+    section { margin-bottom: 4rem; }
+
+    section:first-child { margin-top: 0; }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: 1.75rem;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      padding-bottom: .8rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    /* ── SUMMARY ── */
+    .summary p {
+      font-size: 14.5px;
+      line-height: 1.8;
+      color: #3a3a35;
+      max-width: 62ch;
+    }
+
+    /* ── EXPERIENCE ── */
+    .entry { margin-bottom: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--line); }
+    .entry:last-child { border-bottom: none; }
+
+    .entry-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      margin-bottom: .3rem;
+    }
+
+    .entry-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+    }
+
+    .entry-date {
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+      padding-top: .15rem;
+    }
+
+    .entry-org {
+      font-size: 12px;
+      color: var(--accent);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: .8rem;
+    }
+
+    .entry ul {
+      padding-left: 1.2rem;
+      color: #3a3a35;
+    }
+
+    .entry ul li { margin-bottom: .4rem; }
+
+    /* ── EDUCATION ── */
+    .edu-entry { margin-bottom: 2rem; }
+
+    .edu-degree {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      margin-bottom: .2rem;
+    }
+
+    .edu-school {
+      font-size: 12px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .edu-meta {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: .3rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 1.5rem 6vw;
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 760px) {
+      header { grid-template-columns: 1fr; }
+      .contact-block { text-align: left; }
+      main { grid-template-columns: 1fr; }
+      aside { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--line); padding: 2rem 6vw; }
+      .content { padding: 2rem 6vw; }
+      nav { overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="name">Sayed Arshad Khan</div>
+    <div class="title-tag">Economist · Applied Econometrics & Macroeconomic Analysis</div>
+  </div>
+  <div class="contact-block">
+    <div><a href="mailto:sayedahaa@gmail.com">sayedahaa@gmail.com</a></div>
+    <div>+971 509 545 369</div>
+    <div><a href="https://linkedin.com" target="_blank">LinkedIn ↗</a></div>
+    <div>Dubai, UAE</div>
+  </div>
+</header>
+
+<nav>
+  <a href="#summary">Summary</a>
+  <a href="#experience">Experience</a>
+  <a href="#education">Education</a>
+  <a href="#training">Training</a>
+</nav>
+
+<main>
+  <aside>
+    <div class="section-label">Skills</div>
+
+    <div class="skills-group">
+      <h4>Macroeconomic Modelling</h4>
+      <div class="tag-list">
+        <span class="tag">VAR / SVAR</span>
+        <span class="tag">VECM</span>
+        <span class="tag">Stationarity Testing</span>
+        <span class="tag">Scenario Analysis</span>
+        <span class="tag">Forecasting</span>
+        <span class="tag">Structural Break Analysis</span>
+      </div>
+    </div>
+
+    <div class="skills-group">
+      <h4>Econometrics</h4>
+      <div class="tag-list">
+        <span class="tag">DiD Modelling</span>
+        <span class="tag">Panel Data</span>
+        <span class="tag">IV Frameworks</span>
+        <span class="tag">RDD</span>
+        <span class="tag">Robustness Checks</span>
+        <span class="tag">Impact Evaluation</span>
+      </div>
+    </div>
+
+    <div class="skills-group">
+      <h4>Tools</h4>
+      <div class="tag-list">
+        <span class="tag">EViews</span>
+        <span class="tag">Stata</span>
+        <span class="tag">R</span>
+        <span class="tag">SPSS</span>
+        <span class="tag">Excel</span>
+        <span class="tag">QGIS</span>
+      </div>
+    </div>
+
+    <div class="skills-group">
+      <h4>Communication</h4>
+      <div class="tag-list">
+        <span class="tag">Policy Briefs</span>
+        <span class="tag">Economic Reporting</span>
+        <span class="tag">Stakeholder Engagement</span>
+        <span class="tag">Presentations</span>
+      </div>
+    </div>
+  </aside>
+
+  <div class="content">
+
+    <section id="summary" class="summary">
+      <h2>About</h2>
+      <p>
+        Economist with postgraduate training in macroeconomics, applied econometrics, and forecasting.
+        Experienced in time-series modelling (VAR, VECM), scenario analysis, and panel econometrics
+        using EViews, Stata, and R. Strong background in analysing large socio-economic datasets,
+        building structured economic models, and translating quantitative outputs into clear,
+        policy-relevant advisory insights. Comfortable presenting analysis to diverse audiences and
+        working across research and client-facing environments.
+      </p>
+    </section>
+
+    <section id="experience">
+      <h2>Experience</h2>
+
+      <div class="entry">
+        <div class="entry-header">
+          <div class="entry-title">Economics & Public Policy Researcher</div>
+          <div class="entry-date">Mar 2024 – Apr 2025</div>
+        </div>
+        <div class="entry-org">IIT Gandhinagar — Master's Thesis</div>
+        <ul>
+          <li>Built and estimated econometric panel models in Stata to evaluate regional economic outcomes around large-scale water infrastructure investments (Narmada Basin).</li>
+          <li>Constructed village-level panel datasets by integrating Economic Census, Population Census, and geospatial data using QGIS.</li>
+          <li>Conducted robustness checks and structured interpretation of results, analysing employment and structural economic shifts over time.</li>
+          <li>Translated econometric outputs into clear analytical reports for academic and policy audiences.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <div class="entry-title">Energy Policy Research Associate (Intern)</div>
+          <div class="entry-date">May 2024 – Jul 2024</div>
+        </div>
+        <div class="entry-org">Centre for Public Policy Research (CPPR), Kochi</div>
+        <ul>
+          <li>Analysed electricity market structures, pricing frameworks, and renewable transition policies in Kerala.</li>
+          <li>Reviewed the Electricity Act (2003) and state-level regulations to assess institutional and market reform implications.</li>
+          <li>Contributed to policy briefs and presentations aimed at stakeholder and advisory audiences.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <div class="entry-title">Sustainable Development Associate</div>
+          <div class="entry-date">Aug 2023 – Apr 2024</div>
+        </div>
+        <div class="entry-org">Kiran C. Patel Center for Sustainable Development, IITGN</div>
+        <ul>
+          <li>Supported research across climate, water, and energy transition themes through quantitative data analysis and structured reporting.</li>
+          <li>Assisted in preparation of institutional reports and presentations.</li>
+          <li>Coordinated seminars and stakeholder engagements.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="education">
+      <h2>Education</h2>
+
+      <div class="edu-entry">
+        <div class="edu-degree">Master of Arts — Society & Culture <em style="font-family:var(--serif);font-weight:400">(Economics & Public Policy)</em></div>
+        <div class="edu-school">Indian Institute of Technology Gandhinagar</div>
+        <div class="edu-meta">2023 – 2025 &nbsp;·&nbsp; CGPA 8.61 / 10 &nbsp;·&nbsp; Applied Econometrics · Impact Evaluation · Energy Economics · Regulation</div>
+      </div>
+
+      <div class="edu-entry">
+        <div class="edu-degree">Bachelor of Technology — Civil Engineering</div>
+        <div class="edu-school">Cochin University of Science and Technology (CUSAT)</div>
+        <div class="edu-meta">2018 – 2022 &nbsp;·&nbsp; CGPA 8.22 / 10 &nbsp;·&nbsp; Engineering Economics · Project Management · Advanced Mathematics</div>
+      </div>
+    </section>
+
+    <section id="training">
+      <h2>Professional Training</h2>
+
+      <div class="entry">
+        <div class="entry-header">
+          <div class="entry-title">Macroeconometric Forecasting</div>
+          <div class="entry-date">IMF — edX</div>
+        </div>
+        <div class="entry-org">International Monetary Fund</div>
+        <ul>
+          <li>Advanced training in applied time-series econometrics covering VAR/SVAR, cointegration, VECM, structural breaks, and forecast evaluation.</li>
+          <li>Built forecasting models using macroeconomic datasets and conducted applied modelling on U.S. saving rate dynamics for policy scenario analysis.</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <span>Sayed Arshad Khan — Economist</span>
+  <span>Dubai, UAE · 2025</span>
+</footer>
+
+</body>
+</html>
